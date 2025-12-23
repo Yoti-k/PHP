@@ -1,22 +1,25 @@
 <?php
+// ЗАДАНИЕ 1: Анонимная функция swap
+$swap = function(&$a, &$b) {
+    $temp = $a;
+    $a = $b;
+    $b = $temp;
+};
 
-
-function swap(&$a, &$b): void {
-    $a ^= $b;
-    $b ^= $a;
-    $a ^= $b;
-}
-
+echo "<h3>Задание 1: Обмен значений</h3>";
 
 $a = 5;
 $b = 8;
-swap($a, $b);
+echo "До обмена: a = $a, b = $b<br>";
+$swap($a, $b);
+echo "После обмена: a = $a, b = $b<br>";
 
-echo '5 === $b: ', (5 === $b) ? 'true' : 'false';
-echo "<br>";
-echo '8 === $a: ', (8 === $a) ? 'true' : 'false';
-echo "<br>";
+var_dump(5 === $b); // true
+var_dump(8 === $a); // true
 
+echo "<br><h3>Задание 2: Функция map</h3>";
+
+// ЗАДАНИЕ 2: Функция map
 function map(array $array, callable $callback): array {
     $result = [];
     foreach ($array as $value) {
@@ -25,12 +28,10 @@ function map(array $array, callable $callback): array {
     return $result;
 }
 
-// Пример использования с массивом чисел
+// Вызов как в задании
 $numbers = [1, 2, 3, 4, 5];
+$squaredNumbers = map($numbers, fn($n) => $n ** 2);
 
-// Используем стрелочную функцию для возведения в квадрат
-$squaredNumbers = map($numbers, fn($x) => $x * $x);
-
-// Вывод результата
-echo "Исходный массив: " . implode(', ', $numbers) . "\n";
-echo "Квадраты чисел: " . implode(', ', $squaredNumbers) . "\n";
+echo "Исходный массив: " . implode(', ', $numbers) . "<br>";
+echo "Массив квадратов: " . implode(', ', $squaredNumbers) . "<br>";
+?>
