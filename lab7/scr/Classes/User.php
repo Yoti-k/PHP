@@ -1,43 +1,57 @@
 <?php
-namespace scr\Classes;
+namespace src\Classes;
 
+/**
+ * Класс User представляет базового пользователя системы
+ * 
+ * Содержит основные свойства пользователя: имя, логин и пароль.
+ * Предоставляет методы для отображения информации и автоматического
+ * вывода сообщения при удалении объекта.
+ * 
+ * @package src\Classes
+ */
 class User
 {
-
-    public $name;
-    public $login;
-    private $password;
-
     /**
-     * Конструктор класса User.
-     *
-     * @param string $name Имя пользователя.
-     * @param string $login Логин пользователя.
-     * @param string $password Пароль пользователя.
+     * Конструктор класса User с продвижением параметров
+     * 
+     * Параметры конструктора автоматически становятся свойствами класса.
+     * Инициализирует свойства пользователя при создании объекта.
+     * 
+     * @param string $name Имя пользователя
+     * @param string $login Логин пользователя
+     * @param string $password Пароль пользователя
      */
-    public function __construct($name, $login, $password)
-    {
-        $this->name = $name;
-        $this->login = $login;
-        $this->password = $password;
+    public function __construct(
+        public string $name,
+        public string $login,
+        private string $password
+    ) {
+        // Свойства уже инициализированы благодаря продвижению параметров
     }
 
     /**
-     * Выводит информацию о пользователе.
-     *
-     * @return string - Возвращает строкой HTML-блок с информацией о пользователе
+     * Возвращает HTML-строку с информацией о пользователе
+     * 
+     * Формирует оформленный HTML-блок с именем и логином пользователя.
+     * Используется для отображения информации на веб-странице.
+     * 
+     * @return string HTML-строка с информацией о пользователе
      */
-    public function showInfo(): string   {
+    public function showInfo(): string
+    {
         return "<div class=\"user-info\">
                     <h3>User Info</h3>
                     <p><strong>Name:</strong> {$this->name}</p>
                     <p><strong>Login:</strong> {$this->login}</p>
                 </div>";
-    }   
+    }
 
     /**
-     * Деструктор класса User.
-     * Выводит сообщение об удалении пользователя.
+     * Деструктор класса User
+     * 
+     * Автоматически вызывается при удалении объекта.
+     * Выводит сообщение о удалении пользователя с указанием его логина.
      */
     public function __destruct()
     {
